@@ -3,3 +3,679 @@
 JavaFX es una biblioteca de Java para crear interfaces gráficas de usuario (GUI) modernas y ricas. A diferencia de Swing, que es más antigua y se basa en AWT (Abstract Window Toolkit), JavaFX utiliza un enfoque basado en escenas y gráficos vectoriales. Esto permite crear interfaces más atractivas y dinámicas.
 JavaFX es parte de la plataforma Java SE (Standard Edition) y se puede utilizar para desarrollar aplicaciones de escritorio, móviles y web. A continuación, se presentan algunos conceptos clave y ejemplos básicos para comenzar a trabajar con JavaFX.
 
+## ¿Cómo funciona JavaFX?
+
+JavaFX se basa en el concepto de "escenas" y "nodos". Una escena es un contenedor que contiene nodos, que son los elementos gráficos de la interfaz, como botones, etiquetas, campos de texto, etc. Cada nodo puede tener propiedades y eventos asociados.
+
+Las escenas se organizan en un árbol jerárquico, donde cada nodo puede tener hijos y padres. Esto permite crear interfaces complejas de manera estructurada.
+
+Los nodos de JavaFX son objetos que representan elementos gráficos en la interfaz de usuario. Algunos ejemplos comunes de nodos son:
+- `Button`: Representa un botón que el usuario puede hacer clic.
+- `Label`: Representa una etiqueta de texto.
+- `TextField`: Representa un campo de texto donde el usuario puede ingresar datos.
+- `CheckBox`: Representa una casilla de verificación.
+- `RadioButton`: Representa un botón de opción que permite seleccionar una opción entre varias.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class JavaFXExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        // Crear nodos
+        Label label = new Label("Hola, JavaFX!");
+        Button button = new Button("Haz clic aquí");
+
+        // Configurar el evento del botón
+        button.setOnAction(event -> label.setText("¡Botón clicado!"));
+
+        // Crear un layout y agregar los nodos
+        VBox layout = new VBox(10); // VBox con 10 píxeles de separación entre nodos
+        layout.getChildren().addAll(label, button);
+
+        // Crear una escena y establecerla en el escenario
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+El método `start` es el punto de entrada de la aplicación JavaFX. Aquí se crean los nodos, se configuran sus propiedades y eventos, y se organizan en un layout (en este caso, un `VBox`, que organiza los nodos verticalmente).
+
+El método `launch(args)` inicia la aplicación JavaFX. El `Stage` es la ventana principal de la aplicación, y la `Scene` es el contenido que se muestra en esa ventana.
+
+## Estructura de un proyecto JavaFX
+Un proyecto JavaFX típico tiene la siguiente estructura:
+
+```
+src/
+└── main
+    ├── java
+    │   └── com
+    │       └── ejemplo
+    │           └── JavaFXExample.java
+    └── resources
+        └── styles.css (opcional, para estilos personalizados)
+```
+
+Para compilar y ejecutar un proyecto JavaFX, es necesario tener configurado el entorno de desarrollo con las bibliotecas de JavaFX. A partir de Java 11, JavaFX se distribuye como un conjunto de módulos separados, por lo que es necesario agregar las dependencias correspondientes en el archivo `module-info.java` si se utiliza un sistema de módulos.
+
+```java
+module com.ejemplo {
+    requires javafx.controls;
+    requires javafx.fxml;
+
+    opens com.ejemplo to javafx.fxml;
+    exports com.ejemplo;
+}
+```
+
+Este archivo define el módulo de la aplicación y las dependencias necesarias para utilizar JavaFX. Es importante asegurarse de que las bibliotecas de JavaFX estén en el classpath al compilar y ejecutar la aplicación.
+
+## Los métodos más comunes de JavaFX
+
+JavaFX proporciona una amplia gama de métodos y clases para crear interfaces gráficas. Algunos de los métodos más comunes incluyen:
+- `setOnAction()`: Configura un evento de acción para un nodo, como un botón.   
+- `setText()`: Establece el texto de un nodo, como una etiqueta o un botón.
+- `setStyle()`: Aplica estilos CSS a un nodo para personalizar su apariencia.
+- `setLayoutX()` y `setLayoutY()`: Establecen la posición de un nodo en la escena.
+- `setPrefWidth()` y `setPrefHeight()`: Establecen el ancho y alto preferidos de un nodo.
+- `setVisible()`: Establece la visibilidad de un nodo (true o false).
+- `setDisable()`: Deshabilita un nodo, impidiendo que el usuario interactúe con él.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class JavaFXExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label label = new Label("Hola, JavaFX!");
+        Button button = new Button("Haz clic aquí");
+
+        // Configurar el evento del botón
+        button.setOnAction(event -> label.setText("¡Botón clicado!"));
+        button.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, button);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+## Ejemplos de Componentes Comunes
+
+JavaFX ofrece una variedad de componentes comunes que se pueden utilizar para construir interfaces de usuario interactivas. Aquí hay algunos ejemplos de componentes y cómo usarlos:
+
+### Botones
+Los botones son uno de los componentes más utilizados en JavaFX. Se pueden crear fácilmente y se les pueden asignar eventos para manejar las acciones del usuario.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class ButtonExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Button button = new Button("Haz clic aquí");
+        button.setOnAction(event -> System.out.println("¡Botón clicado!"));
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(button);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Botón en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Etiquetas
+Las etiquetas se utilizan para mostrar texto en la interfaz de usuario. Se pueden personalizar con diferentes estilos y fuentes.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+public class LabelExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label label = new Label("Hola, JavaFX!");
+        label.setStyle("-fx-font-size: 20px; -fx-text-fill: blue;");
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(label);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Etiqueta en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Campos de Texto
+Los campos de texto permiten al usuario ingresar datos. Se pueden utilizar para capturar información como nombres, direcciones, etc.
+
+```java
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class TextFieldExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        TextField textField = new TextField();
+        textField.setPromptText("Ingresa tu nombre");
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(textField);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Campo de Texto en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Casillas de Verificación
+Las casillas de verificación permiten al usuario seleccionar una o más opciones. Son útiles para configuraciones y preferencias.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class CheckBoxExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        CheckBox checkBox = new CheckBox("Acepto los términos y condiciones");
+        checkBox.setOnAction(event -> {
+            if (checkBox.isSelected()) {
+                System.out.println("Casilla seleccionada");
+            } else {
+                System.out.println("Casilla deseleccionada");
+            }
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(checkBox);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Casilla de Verificación en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Botones de Opción
+Los botones de opción permiten al usuario seleccionar una opción entre varias. Son útiles cuando solo se puede seleccionar una opción a la vez.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class RadioButtonExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        ToggleGroup group = new ToggleGroup();
+
+        RadioButton option1 = new RadioButton("Opción 1");
+        option1.setToggleGroup(group);
+        RadioButton option2 = new RadioButton("Opción 2");
+        option2.setToggleGroup(group);
+        RadioButton option3 = new RadioButton("Opción 3");
+        option3.setToggleGroup(group);
+
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                System.out.println("Seleccionado: " + ((RadioButton) newValue).getText());
+            }
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(option1, option2, option3);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Botones de Opción en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Listas Desplegables
+Las listas desplegables permiten al usuario seleccionar una opción de una lista predefinida. Son útiles para seleccionar entre múltiples opciones sin ocupar mucho espacio en la interfaz.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class ComboBoxExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll("Opción 1", "Opción 2", "Opción 3");
+        comboBox.setPromptText("Selecciona una opción");
+
+        comboBox.setOnAction(event -> {
+            System.out.println("Seleccionado: " + comboBox.getValue());
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(comboBox);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Lista Desplegable en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Tablas
+Las tablas permiten mostrar datos en un formato tabular, lo que es útil para mostrar listas de elementos con múltiples atributos.
+
+```java
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class TableViewExample extends Application {
+    public static class Person {
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        TableView<Person> tableView = new TableView<>();
+        ObservableList<Person> data = FXCollections.observableArrayList(
+                new Person("Juan", 25),
+                new Person("María", 30),
+                new Person("Pedro", 22)
+        );
+
+        TableColumn<Person, String> nameColumn = new TableColumn<>("Nombre");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Person, Integer> ageColumn = new TableColumn<>("Edad");
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+
+        tableView.setItems(data);
+        tableView.getColumns().addAll(nameColumn, ageColumn);
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(tableView);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Tabla en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Deslizadores
+Los deslizadores permiten al usuario seleccionar un valor dentro de un rango. Son útiles para ajustar configuraciones como volumen, brillo, etc.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class SliderExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Slider slider = new Slider(0, 100, 50);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+
+        Label label = new Label("Valor: " + slider.getValue());
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            label.setText("Valor: " + newValue.intValue());
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(slider, label);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Deslizador en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Barras de Progreso
+Las barras de progreso muestran el progreso de una tarea en curso. Son útiles para indicar al usuario cuánto tiempo falta para completar una operación.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+public class ProgressBarExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        ProgressBar progressBar = new ProgressBar(0);
+        Button button = new Button("Iniciar Progreso");
+
+        button.setOnAction(event -> {
+            new Thread(() -> {
+                for (int i = 0; i <= 100; i++) {
+                    final int progress = i / 100.0;
+                    try {
+                        Thread.sleep(50); // Simula una tarea que toma tiempo
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // Actualiza la barra de progreso en el hilo de la interfaz de usuario
+                    javafx.application.Platform.runLater(() -> progressBar.setProgress(progress));
+                }
+            }).start();
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(progressBar, button);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Barra de Progreso en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+### Ventanas Emergentes (Dialogs)
+Las ventanas emergentes son útiles para mostrar mensajes al usuario, como confirmaciones o alertas. JavaFX proporciona varias clases para crear diferentes tipos de diálogos.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class DialogExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Button button = new Button("Mostrar Alerta");
+        button.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Este es un mensaje de alerta", ButtonType.OK);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Información Importante");
+            alert.showAndWait();
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().add(button);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Ventana Emergente en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+## Eventos y Manejo de Eventos
+
+En JavaFX, los eventos son acciones que ocurren en la interfaz de usuario, como hacer clic en un botón, mover el mouse o teclear en un campo de texto. Para manejar estos eventos, se utilizan "listeners" (escuchas) que responden a las acciones del usuario.
+Los eventos se pueden manejar de varias maneras, pero la forma más común es utilizando el método `setOnAction()` para botones y otros componentes interactivos. También se pueden utilizar listeners para eventos más específicos, como el movimiento del mouse o la pulsación de teclas.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class EventHandlingExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label label = new Label("Haz clic en el botón");
+        Button button = new Button("Haz clic aquí");
+
+        // Manejo del evento de clic en el botón
+        button.setOnAction(event -> label.setText("¡Botón clicado!"));
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, button);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Manejo de Eventos en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+:::info [Sobre el manejo de eventos en JavaFX]
+El manejo de eventos en JavaFX es fundamental para crear aplicaciones interactivas. Puedes manejar eventos de diferentes tipos, como clics del mouse, pulsaciones de teclas, cambios en campos de texto, entre otros. Cada componente tiene sus propios eventos específicos que puedes manejar.
+:::
+
+## Estilos y CSS en JavaFX
+JavaFX permite aplicar estilos a los componentes utilizando CSS (Cascading Style Sheets). Esto facilita la personalización de la apariencia de la interfaz sin necesidad de modificar el código Java. Puedes definir estilos en un archivo CSS separado y aplicarlos a los nodos de JavaFX.
+
+```css
+.button {
+    -fx-background-color: #4CAF50; /* Color de fondo */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 16px; /* Tamaño de fuente */
+}
+.label {
+    -fx-text-fill: blue; /* Color del texto */
+    -fx-font-size: 20px; /* Tamaño de fuente */
+}
+```
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class CSSExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label label = new Label("Hola, JavaFX con CSS!");
+        Button button = new Button("Haz clic aquí");
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, button);
+
+        // Cargar el archivo CSS
+        Scene scene = new Scene(layout, 300, 200);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Estilos en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+## Ejemplos de Aplicaciones JavaFX
+
+JavaFX se utiliza para crear una amplia variedad de aplicaciones, desde simples herramientas de escritorio hasta complejas aplicaciones empresariales. Aquí hay algunos ejemplos de aplicaciones que se pueden desarrollar con JavaFX:
+- **Aplicaciones de Escritorio**: Herramientas de productividad, editores de texto, aplicaciones de gestión de tareas, etc.
+- **Juegos**: Juegos 2D y 3D utilizando las capacidades gráficas de JavaFX.
+- **Aplicaciones Empresariales**: Sistemas de gestión, aplicaciones de inventario, CRM, etc.
+- **Aplicaciones Móviles**: Con JavaFX, también es posible desarrollar aplicaciones móviles utilizando herramientas como Gluon.
+- **Aplicaciones Web**: Aunque JavaFX no está diseñado específicamente para aplicaciones web, se pueden crear aplicaciones híbridas que utilicen JavaFX en el lado del cliente y tecnologías web en el servidor.
+
+### Ejemplo de Aplicación de Escritorio con JavaFX
+
+A continuación, se muestra un ejemplo sencillo de aplicación en la que el usuario puede loguearse y si se loguea correctamente, se muestra un mensaje de bienvenida.
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class LoginExample extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label usernameLabel = new Label("Usuario:");
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Ingresa tu usuario");
+
+        Label passwordLabel = new Label("Contraseña:");
+        TextField passwordField = new TextField();
+        passwordField.setPromptText("Ingresa tu contraseña");
+
+        Button loginButton = new Button("Iniciar Sesión");
+        Label messageLabel = new Label();
+
+        loginButton.setOnAction(event -> {
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            if ("admin".equals(username) && "1234".equals(password)) {
+                messageLabel.setText("¡Bienvenido, " + username + "!");
+            } else {
+                messageLabel.setText("Usuario o contraseña incorrectos.");
+            }
+        });
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, loginButton, messageLabel);
+
+        Scene scene = new Scene(layout, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ejemplo de Login en JavaFX");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+```
+
+Este ejemplo muestra cómo crear una simple interfaz de usuario para un formulario de inicio de sesión. El usuario ingresa su nombre de usuario y contraseña, y al hacer clic en el botón "Iniciar Sesión", se verifica si las credenciales son correctas. Si lo son, se muestra un mensaje de bienvenida; de lo contrario, se muestra un mensaje de error.
+

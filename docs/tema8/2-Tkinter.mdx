@@ -30,3 +30,279 @@ button = tk.Button(root, text="Haz clic aquí", command=on_button_click)
 button.pack(pady=10)
 root.mainloop()
 ```
+
+Este código crea una ventana con un título, un tamaño específico y un botón que muestra un mensaje cuando se hace clic en él. La función `mainloop()` inicia el bucle de eventos de la aplicación, lo que permite que la ventana permanezca abierta y responda a las interacciones del usuario.
+
+## Widgets comunes
+Tkinter proporciona una variedad de widgets que puedes utilizar para construir tu interfaz gráfica. Algunos de los widgets más comunes son:
+- **Label**: Muestra texto o imágenes.
+- **Button**: Un botón que el usuario puede hacer clic.
+- **Entry**: Un campo de texto de una sola línea.
+- **Text**: Un campo de texto de varias líneas.
+- **Checkbutton**: Un botón de verificación que permite seleccionar o deseleccionar una opción.
+- **Radiobutton**: Un botón de opción que permite seleccionar una opción de un grupo.
+- **Listbox**: Muestra una lista de elementos seleccionables.
+- **Combobox**: Un campo de entrada combinado con una lista desplegable.
+- **Frame**: Un contenedor para agrupar otros widgets.
+- **Menu**: Un menú desplegable que contiene opciones.
+- **Canvas**: Un área para dibujar gráficos, formas y otros elementos visuales.
+- **Scrollbar**: Una barra de desplazamiento para widgets que contienen contenido desplazable.
+- **Message**: Similar a Label, pero diseñado para mostrar mensajes de varias líneas.
+- **Scale**: Un control deslizante para seleccionar un valor dentro de un rango.
+- **Spinbox**: Un campo de entrada que permite seleccionar un valor de una lista predefinida.
+- **Progressbar**: Un indicador visual del progreso de una tarea.
+- **Notebook**: Un widget que permite crear pestañas para organizar contenido.
+- **PanedWindow**: Un contenedor que permite dividir el espacio en paneles ajustables.
+- **Toplevel**: Una ventana independiente que se puede utilizar para crear diálogos o ventanas secundarias.
+- **LabelFrame**: Un marco con una etiqueta que se utiliza para agrupar widgets relacionados.
+- **MessageBox**: Un cuadro de diálogo para mostrar mensajes de información, advertencia o error.
+- **PhotoImage**: Un widget para mostrar imágenes en formatos como PNG y GIF.
+- **BitmapImage**: Un widget para mostrar imágenes en formato bitmap.
+- **Font**: Un objeto que representa una fuente tipográfica que se puede aplicar a los widgets de texto.
+- **ColorChooser**: Un cuadro de diálogo para seleccionar colores.
+- **FileDialog**: Un cuadro de diálogo para seleccionar archivos o directorios.
+- **TextInputDialog**: Un cuadro de diálogo para solicitar entrada de texto al usuario.
+- **MessageDialog**: Un cuadro de diálogo para mostrar mensajes al usuario.
+- **ProgressDialog**: Un cuadro de diálogo que muestra el progreso de una tarea en curso.
+- **ConfirmationDialog**: Un cuadro de diálogo que solicita confirmación del usuario antes de realizar una acción.
+- **ErrorDialog**: Un cuadro de diálogo que muestra un mensaje de error al usuario.
+- **WarningDialog**: Un cuadro de diálogo que muestra una advertencia al usuario.
+- **InformationDialog**: Un cuadro de diálogo que muestra información al usuario.
+- **InputDialog**: Un cuadro de diálogo que solicita al usuario que ingrese un valor.
+- **ColorPicker**: Un cuadro de diálogo que permite al usuario seleccionar un color.
+- **FilePicker**: Un cuadro de diálogo que permite al usuario seleccionar un archivo.
+- **DirectoryPicker**: Un cuadro de diálogo que permite al usuario seleccionar un directorio.
+- **FontPicker**: Un cuadro de diálogo que permite al usuario seleccionar una fuente tipográfica.
+- **DatePicker**: Un cuadro de diálogo que permite al usuario seleccionar una fecha.
+- **TimePicker**: Un cuadro de diálogo que permite al usuario seleccionar una hora.
+
+```python
+import tkinter as tk
+from tkinter import messagebox
+def on_button_click():
+    messagebox.showinfo("Información", "¡Botón presionado!")
+root = tk.Tk()
+root.title("Widgets Comunes")
+root.geometry("400x300")
+label = tk.Label(root, text="Selecciona una opción:")
+label.pack(pady=10)
+button = tk.Button(root, text="Presiona aquí", command=on_button_click)
+button.pack(pady=10)
+entry = tk.Entry(root)
+entry.pack(pady=10)
+checkbutton = tk.Checkbutton(root, text="Opción 1")
+checkbutton.pack(pady=5)
+radiobutton1 = tk.Radiobutton(root, text="Opción A", value=1)
+radiobutton1.pack(pady=5)
+radiobutton2 = tk.Radiobutton(root, text="Opción B", value=2)
+radiobutton2.pack(pady=5)
+listbox = tk.Listbox(root)
+listbox.pack(pady=10)
+listbox.insert(tk.END, "Elemento 1")
+listbox.insert(tk.END, "Elemento 2")
+listbox.insert(tk.END, "Elemento 3")
+combobox = tk.ttk.Combobox(root, values=["Opción 1", "Opción 2", "Opción 3"])
+combobox.pack(pady=10)
+combobox.current(0)  # Selecciona la primera opción
+frame = tk.Frame(root, bg="lightgray", width=200, height=100)
+frame.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)
+canvas = tk.Canvas(frame, bg="white")
+canvas.pack(fill=tk.BOTH, expand=True)
+canvas.create_rectangle(50, 20, 150, 80, fill="blue")
+canvas.create_text(100, 50, text="Rectángulo", fill="white")
+root.mainloop()
+```
+
+En el ejemplo anterior, se crean varios widgets comunes, como etiquetas, botones, campos de entrada, botones de verificación, botones de opción, listas y un lienzo para dibujar formas. Cada widget se agrega a la ventana principal utilizando el método `pack()`, que organiza los widgets en la ventana.
+
+## Eventos y manejo de eventos
+
+En Tkinter, puedes manejar eventos como clics de botones, teclas presionadas y otros eventos de la interfaz gráfica. Para hacerlo, debes definir una función que se ejecute cuando ocurra el evento y asociarla al widget correspondiente. Por ejemplo, para manejar el clic de un botón, puedes utilizar el parámetro `command` al crear el botón.
+
+```python
+import tkinter as tk
+def on_button_click():
+    print("¡Botón presionado!")
+root = tk.Tk()
+root.title("Manejo de Eventos")
+root.geometry("300x200")
+button = tk.Button(root, text="Presiona aquí", command=on_button_click)
+button.pack(pady=20)
+root.mainloop()
+```
+
+En este ejemplo, se define una función `on_button_click()` que se ejecuta cuando el usuario hace clic en el botón. La función imprime un mensaje en la consola.
+
+## Diseño de la interfaz
+
+Para diseñar la interfaz de usuario, puedes utilizar diferentes métodos de geometría en Tkinter, como `pack()`, `grid()` y `place()`. Cada uno tiene sus propias características y se adapta a diferentes necesidades de diseño.
+- **pack()**: Organiza los widgets en bloques verticales u horizontales. Es fácil de usar para diseños simples.
+- **grid()**: Organiza los widgets en una cuadrícula, lo que permite un control más preciso sobre la disposición de los widgets. Es útil para diseños más complejos.
+- **place()**: Permite posicionar los widgets en coordenadas específicas dentro de la ventana. Es útil para diseños personalizados, pero menos flexible que los otros métodos.
+
+### Ejemplo de diseño con `pack()`
+
+```python
+import tkinter as tk
+def on_button_click():
+    print("¡Botón presionado!")
+root = tk.Tk()
+root.title("Diseño de la Interfaz")
+root.geometry("300x200")
+button1 = tk.Button(root, text="Botón 1", command=on_button_click)
+button1.pack(side=tk.LEFT, padx=10, pady=10)
+button2 = tk.Button(root, text="Botón 2", command=on_button_click)
+button2.pack(side=tk.LEFT, padx=10, pady=10)
+button3 = tk.Button(root, text="Botón 3", command=on_button_click)
+button3.pack(side=tk.LEFT, padx=10, pady=10)
+root.mainloop()
+```
+
+### Ejemplo de diseño con `grid()`
+
+```python
+import tkinter as tk
+def on_button_click():
+    print("¡Botón presionado!")
+root = tk.Tk()
+root.title("Diseño de la Interfaz con Grid")
+root.geometry("300x200")
+button1 = tk.Button(root, text="Botón 1", command=on_button_click)
+button1.grid(row=0, column=0, padx=10, pady=10)
+button2 = tk.Button(root, text="Botón 2", command=on_button_click)
+button2.grid(row=0, column=1, padx=10, pady=10)
+button3 = tk.Button(root, text="Botón 3", command=on_button_click)
+button3.grid(row=0, column=2, padx=10, pady=10)
+root.mainloop()
+```
+
+### Ejemplo de diseño con `place()`
+
+```python
+import tkinter as tk
+def on_button_click():
+    print("¡Botón presionado!")
+
+root = tk.Tk()
+root.title("Diseño de la Interfaz con Place")
+root.geometry("300x200")
+button1 = tk.Button(root, text="Botón 1", command=on_button_click)
+button1.place(x=20, y=50, width=80, height=30)
+button2 = tk.Button(root, text="Botón 2", command=on_button_click)
+button2.place(x=120, y=50, width=80, height=30)
+button3 = tk.Button(root, text="Botón 3", command=on_button_click)
+button3.place(x=220, y=50, width=80, height=30)
+root.mainloop()
+```
+
+## Personalización de widgets
+Puedes personalizar los widgets en Tkinter cambiando sus propiedades, como el color de fondo, el tamaño de la fuente, el texto y más. Aquí hay algunos ejemplos de cómo personalizar widgets comunes:
+```python
+import tkinter as tk
+def on_button_click():
+    print("¡Botón personalizado presionado!")
+
+
+root = tk.Tk()
+root.title("Personalización de Widgets")
+root.geometry("300x200")
+button = tk.Button(root, text="Botón Personalizado", command=on_button_click, bg="blue", fg="white", font=("Arial", 12))
+button.pack(pady=20)
+label = tk.Label(root, text="Etiqueta Personalizada", bg="lightgray", fg="black", font=("Arial", 14))
+label.pack(pady=10)
+entry = tk.Entry(root, bg="white", fg="black", font=("Arial", 12))
+entry.pack(pady=10)
+entry.insert(0, "Texto de ejemplo")
+root.mainloop()
+```
+
+En este ejemplo, se personalizan un botón, una etiqueta y un campo de entrada cambiando sus colores de fondo, colores de texto y fuentes.
+
+## Manejo de menús
+Tkinter también permite crear menús desplegables para organizar las opciones de la aplicación. Puedes crear un menú principal y agregar submenús para diferentes acciones. Aquí hay un ejemplo de cómo crear un menú en Tkinter:
+
+```python
+import tkinter as tk
+from tkinter import messagebox
+def on_new():
+    messagebox.showinfo("Nuevo", "Crear un nuevo archivo")
+def on_open():
+    messagebox.showinfo("Abrir", "Abrir un archivo existente")
+def on_exit():
+    root.quit()
+root = tk.Tk()
+root.title("Manejo de Menús")
+root.geometry("300x200")
+menu_bar = tk.Menu(root)
+file_menu = tk.Menu(menu_bar, tearoff=0)
+file_menu.add_command(label="Nuevo", command=on_new)
+file_menu.add_command(label="Abrir", command=on_open)
+file_menu.add_separator()
+file_menu.add_command(label="Salir", command=on_exit)
+menu_bar.add_cascade(label="Archivo", menu=file_menu)
+root.config(menu=menu_bar)
+root.mainloop()
+```
+
+En este ejemplo, se crea un menú principal con una opción "Archivo" que contiene submenús para "Nuevo", "Abrir" y "Salir". Cada opción del menú está asociada a una función que se ejecuta cuando se selecciona la opción.
+
+## Diálogos
+
+Tkinter proporciona varios diálogos predefinidos para interactuar con el usuario, como cuadros de mensaje, cuadros de entrada y cuadros de selección de archivos. Aquí hay un ejemplo de cómo usar algunos de estos diálogos:
+
+```python
+import tkinter as tk
+from tkinter import messagebox, simpledialog, filedialog
+def show_message():
+    messagebox.showinfo("Información", "Este es un cuadro de mensaje")
+def get_input():
+    user_input = simpledialog.askstring("Entrada", "Ingrese su nombre:")
+    if user_input:
+        messagebox.showinfo("Nombre", f"Hola, {user_input}!")
+def open_file():
+    file_path = filedialog.askopenfilename(title="Abrir archivo", filetypes=[("Archivos de texto", "*.txt"), ("Todos los archivos", "*.*")])
+    if file_path:
+        messagebox.showinfo("Archivo seleccionado", f"Has seleccionado: {file_path}")
+root = tk.Tk()
+root.title("Diálogos en Tkinter")
+root.geometry("300x200")
+button_message = tk.Button(root, text="Mostrar mensaje", command=show_message)
+button_message.pack(pady=10)
+button_input = tk.Button(root, text="Obtener entrada", command=get_input)
+button_input.pack(pady=10)
+button_file = tk.Button(root, text="Abrir archivo", command=open_file)
+button_file.pack(pady=10)
+root.mainloop()
+```
+En este ejemplo, se crean tres botones que muestran diferentes diálogos: un cuadro de mensaje, un cuadro de entrada para solicitar el nombre del usuario y un cuadro de diálogo para seleccionar un archivo. Cada botón está asociado a una función que maneja la interacción con el usuario.
+
+## Ejemplos avanzados
+Para aplicaciones más avanzadas, puedes combinar varios widgets y técnicas de diseño para crear interfaces de usuario complejas. Aquí hay un ejemplo que combina varios widgets y utiliza un diseño de cuadrícula:
+
+```python
+import tkinter as tk
+from tkinter import messagebox
+def on_submit():
+    name = entry_name.get()
+    age = entry_age.get()
+    messagebox.showinfo("Información", f"Nombre: {name}\nEdad: {age}")
+root = tk.Tk()
+root.title("Ejemplo Avanzado de Tkinter")
+root.geometry("400x300")
+label_name = tk.Label(root, text="Nombre:")
+label_name.grid(row=0, column=0, padx=10, pady=10)
+entry_name = tk.Entry(root)
+entry_name.grid(row=0, column=1, padx=10, pady=10)
+label_age = tk.Label(root, text="Edad:")
+label_age.grid(row=1, column=0, padx=10, pady=10)
+entry_age = tk.Entry(root)
+entry_age.grid(row=1, column=1, padx=10, pady=10)
+button_submit = tk.Button(root, text="Enviar", command=on_submit)
+button_submit.grid(row=2, column=0, columnspan=2, pady=20)
+root.mainloop()
+```
+
+En este ejemplo, se crea un formulario simple con campos de entrada para el nombre y la edad, y un botón para enviar la información. Los widgets se organizan utilizando el método `grid()`, lo que permite un diseño más estructurado.
+
+
+
